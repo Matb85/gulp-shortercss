@@ -1,4 +1,4 @@
-const expressions = require("../utils/expressions");
+import expressions from "../utils/expressions";
 
 /**
  * Replaces all class and id attributes found in the library. Only tested on *.html files with
@@ -7,7 +7,7 @@ const expressions = require("../utils/expressions");
  * @param {string} File
  * @returns {string} Minified file
  */
-module.exports = function(file, classLibrary, idLibrary) {
+export default function(file: string, classLibrary, idLibrary) {
   return file.replace(expressions.elementAttribute, function(attributes) {
     const attribute = attributes.split("=");
     return (
@@ -25,4 +25,4 @@ module.exports = function(file, classLibrary, idLibrary) {
       })
     );
   });
-};
+}

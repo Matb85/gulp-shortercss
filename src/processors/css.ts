@@ -1,5 +1,4 @@
-const expressions = require("../utils/expressions");
-
+import expressions from "../utils/expressions";
 /**
  * Replaces all class names with shortnames. Also builds a library of shortnames which can be
  * used to reduce other file types.
@@ -7,7 +6,7 @@ const expressions = require("../utils/expressions");
  * @param {string} File
  * @returns {string} Minified file
  */
-module.exports = function(file, classLibrary, idLibrary) {
+export default function(file: string, classLibrary, idLibrary) {
   const selectorNameMatch = expressions.selectorName;
 
   file = file.replace(expressions.classSelector, function(selector) {
@@ -31,4 +30,4 @@ module.exports = function(file, classLibrary, idLibrary) {
   });
 
   return file;
-};
+}

@@ -1,3 +1,5 @@
-.idea
-node_modules
-coverage
+.idea/
+node_modules/
+coverage/
+lib/
+test/example/dist/
