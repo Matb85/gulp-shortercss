@@ -1,4 +1,5 @@
 import expressions from "../utils/expressions";
+import { LibraryInstance } from "../utils/library";
 
 /**
  * Replaces all class and id attributes found in the library. Only tested on *.html files with
@@ -7,7 +8,7 @@ import expressions from "../utils/expressions";
  * @param {string} File
  * @returns {string} Minified file
  */
-export default function(file: string, classLibrary, idLibrary) {
+export default function(file: string, classLibrary: LibraryInstance, idLibrary: LibraryInstance): string {
   return file.replace(expressions.elementAttribute, function(attributes) {
     const attribute = attributes.split("=");
     return (

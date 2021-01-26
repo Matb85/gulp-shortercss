@@ -1,17 +1,6 @@
 "use strict";
 exports.__esModule = true;
-var lodash_1 = require("lodash");
-exports["default"] = {
-    extendDefaults: extendDefaults,
-    getForExtension: getForExtension
-};
-function extendDefaults(processors) {
-    processors = lodash_1.extend({
-        css: ["css"],
-        html: ["html"]
-    }, processors);
-    return processors;
-}
+exports["default"] = { getForExtension: getForExtension };
 function getForExtension(processors, extension) {
     var selectedProcessors = [];
     for (var processor in processors) {

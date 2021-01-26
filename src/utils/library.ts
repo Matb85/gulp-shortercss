@@ -1,19 +1,36 @@
 import { map, filter } from "lodash";
 import generateShortname from "./generate-shortname";
 import multimatch from "multimatch";
-
 /**
  * This handy function returns an empty library. This should be a module on its own so that the
  * logic of retrieving a library does not get mixed up with the library logic itself.
- *
  * @returns {object} Library
  * @constructor
  */
-export default class Library {
-  _library = {};
-  _ignores: any;
+type LibraryType = {
+  [key: string]: {
+    shortname: string;
+    hits: number;
+  };
+};
+export interface LibraryInstance {
+  _library: LibraryType;
+  _ignores: Array<string>;
+  size: number;
+  has(name: string): boolean;
+  get(name: string, dontCount?: boolean): string;
+  getAll(): Array<string>;
+  getUnused(): Array<string>;
+  getSize(): number;
+  getFullNames(): Array<string>;
+  stats(): { size: number; unused: number };
+}
+
+export default class Library implements LibraryInstance {
+  _library: LibraryType = {};
+  _ignores: Array<string>;
   size = 0;
-  constructor(ignores: any) {
+  constructor(ignores: Array<string>) {
     this._ignores = ignores;
   }
 
@@ -25,14 +42,13 @@ export default class Library {
   /**
    * Ensures the name is set and returns it. If generates an ignored name,
    * will increase size and try again
-   *
    * @param name String name to get shortname for from the library
    * @param dontCount Bool to not to count this as a use in the code
    * @returns {string} Shortname of the minified name
    */
-  get(name: string, dontCount: boolean) {
+  get(name: string, dontCount: boolean = false): string {
     // catch all for ignoring IDs
-    if (this._ignores === true) return name;
+    // if (this._ignores === true) return name;
 
     let shortname;
 
@@ -64,7 +80,7 @@ export default class Library {
   }
 
   /** Retrieves shortnames which are not used in the code processed. @returns {array} Of unused names */
-  getUnused() {
+  getUnused(): Array<string> {
     return map(
       filter(this._library, ({ hits }) => {
         return hits === 0;

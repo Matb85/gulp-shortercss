@@ -1,5 +1,5 @@
-const selectorName = "(-?[_a-zA-Z]+[_\\w-]*)";
-const selectorSuffix = "((?=[\\s:#\\.\\{,\\>\\~+\\[\\]]))(?=(?:.|\n|\r)*{)";
+const selectorName = /(-?[_a-zA-Z]+[_\w-]*)/;
+const selectorSuffix = /((?=[\s:#.{,>~+[\]]))(?=(?:.|\n|\r)*{)/;
 
 /**
  * Some awesome expressions that I'll explain in a bit.
@@ -40,8 +40,8 @@ export default {
    * - url('foobar.classname')
    * - other stupid stuff...I dunno check the tests
    */
-  classSelector: new RegExp("(\\.|\\[class[\\^\\$\\|\\*]?=)" + selectorName + selectorSuffix, "gi"),
-  idSelector: new RegExp("(#|\\[id[\\^\\$\\|\\*]?=)" + selectorName + selectorSuffix, "gi"),
+  classSelector: new RegExp("(\\.|\\[class[\\^\\$\\|\\*]?=)" + selectorName.source + selectorSuffix.source, "gi"),
+  idSelector: new RegExp("(#|\\[id[\\^\\$\\|\\*]?=)" + selectorName.source + selectorSuffix.source, "gi"),
   /**
    * Matches HTML class, id, and for attributes. I think those are the only ones we care about...
    *
@@ -57,18 +57,15 @@ export default {
    * - name="selector"
    * - href="selector"
    */
-  elementAttribute: /(class|id|for|aria-labelledby)\s*=\s*["'](-?[_a-zA-Z]+[_\w-\s]*)["']/g,
+  elementAttribute: /(class|id|for|aria-labelledby)\s*=\s*["']([\w\s]+)["']/g,
   /**
    * Matches ID Values
    *
    * All values can be single values or lists and lists can be either comma separated (each val is surrounded by single or double quotes OR a space separated list with not internal quotes (only quotes at beginning and end).
    * .getElementById
    * .id
-   * $ Only matches values with "#"
-   * jQuery Only matches values with "#"
-   * .attr This has a known bug. There is no way to differentiate the leading "class" from "id" in attr without look-behind, which javascript does not support. Therefore, all matches using this regex need to be filtered to remove results which are lists that have "class" as the first value.
    */
-  idList: /(?:\$|jQuery|(?:\.(?:getElementById|id|jQuery|attr)))\s*[(=]{1}\s*(["']{1}#?-?[_a-zA-Z]+[_\w-]*(?:(?:(?:["']{1}\s*,\s*["']{1})|\s+){1}#?-?[_a-zA-Z]+[_\w-]*)*["']{1})/,
+  idList: /(\.(getElementById|id))\s*?[(|=]\s*?(["'])(-*_*[\w\s])+/g,
   /**
    * Matches Class Values
    *
@@ -85,14 +82,14 @@ export default {
    * .attr This has a known bug. There is no way to differentiate the leading "class" from "id" in attr without look-behind, which javascript does not support. Therefore, all matches using this regex need to be filtered to remove results which are lists that have "id" as the first value.
    * .hasClass
    */
-  classList: /(?:\$|jQuery|(?:\.(?:getElementsByClassName|classList\.add|classList\.remove|className|jQuery|addClass|toggleClass|removeClass|attr|hasClass)))\s*[(=]{1}\s*(["']{1}\.?-?[_a-zA-Z]+[_\w-]*(?:(?:(?:["']{1}\s*,\s*["']{1})|\s+){1}\.?-?[_a-zA-Z]+[_\w-]*)*["']{1})/,
+  classList: /(\.(getElementsByClassName|classList\.add|classList\.remove|classList\.toggle|className))\s*?[(|=]\s*?(["'])(-*_*[\w\s])+/g,
   /**
    * Builds a regular expression which will match a quoted string.
    *
    * @param name String of selector name
    * @returns {RegExp}
    */
-  jsString: function(name) {
+  jsString: function(name: string): RegExp {
     return new RegExp("['|\"]" + name + "['|\"]", "g");
   },
 };

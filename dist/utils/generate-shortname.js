@@ -1,7 +1,7 @@
 "use strict";
 exports.__esModule = true;
 function generateShortname(seed) {
-    if (seed !== parseInt(seed, 10))
+    if (typeof seed === "string")
         throw new Error("Seed must be a number");
     if (seed < 0)
         throw new Error("Seed must be at least 0");

@@ -1,20 +1,6 @@
 import { AvailableProcessors, ProcessorFunction } from "../index";
-import { extend } from "lodash";
-export default {
-  extendDefaults,
-  getForExtension,
-};
-function extendDefaults(processors: AvailableProcessors) {
-  processors = extend(
-    {
-      css: ["css"],
-      html: ["html"],
-    },
-    processors
-  );
+export default { getForExtension };
 
-  return processors;
-}
 // getProcessorsForExtension
 function getForExtension(processors: AvailableProcessors, extension: string): Array<ProcessorFunction> {
   const selectedProcessors: Array<ProcessorFunction> = [];

@@ -1,11 +1,9 @@
 /**
  * Helper function for generating shortnames based on an alphabetic library.
- *
- * @param seed Integer
- * @returns {string Shortname}
+ * @param seed Integer @returns {string Shortname}
  */
-export default function generateShortname(seed) {
-  if (seed !== parseInt(seed, 10)) throw new Error("Seed must be a number");
+export default function generateShortname(seed: number): string {
+  if (typeof seed === "string") throw new Error("Seed must be a number");
   if (seed < 0) throw new Error("Seed must be at least 0");
 
   const library = "abcdefghijklmnopqrstuvwxyz";

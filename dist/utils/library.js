@@ -16,8 +16,7 @@ var Library = (function () {
         return this._library[name] !== undefined;
     };
     Library.prototype.get = function (name, dontCount) {
-        if (this._ignores === true)
-            return name;
+        if (dontCount === void 0) { dontCount = false; }
         var shortname;
         if (this._library[name]) {
             shortname = this._library[name].shortname;

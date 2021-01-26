@@ -1,4 +1,6 @@
 import expressions from "../utils/expressions";
+import { LibraryInstance } from "../utils/library";
+
 /**
  * Replaces all class names with shortnames. Also builds a library of shortnames which can be
  * used to reduce other file types.
@@ -6,7 +8,7 @@ import expressions from "../utils/expressions";
  * @param {string} File
  * @returns {string} Minified file
  */
-export default function(file: string, classLibrary, idLibrary) {
+export default function(file: string, classLibrary: LibraryInstance, idLibrary: LibraryInstance): string {
   const selectorNameMatch = expressions.selectorName;
 
   file = file.replace(expressions.classSelector, function(selector) {
