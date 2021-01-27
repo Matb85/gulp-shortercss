@@ -1,10 +1,7 @@
 const { src, dest } = require("gulp");
-const Selectors = require("../../dist").init({
-  "js-strings": ["js"],
-});
+const Selectors = require("../../dist").init(__dirname + "/cssterser.config.js");
 
 exports.default = function() {
-  console.log(Selectors, "\n\n");
   return (
     src(["index.html", "style.css", "script.js"])
       .pipe(Selectors.run())

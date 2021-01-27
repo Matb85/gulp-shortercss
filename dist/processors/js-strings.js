@@ -19,9 +19,9 @@ function default_1(file, classLibrary, idLibrary) {
         var indexOfQuote = code.search(/["']/g) + 1;
         var selectors = code.slice(indexOfQuote).replace(/[#.](-*_*[\w])+/g, function (selector) {
             if (selector[0] === "#")
-                selector = "#" + idLibrary.get(selector.slice(1));
+                return "#" + idLibrary.get(selector.slice(1));
             if (selector[0] === ".")
-                selector = "." + classLibrary.get(selector.slice(1));
+                return "." + classLibrary.get(selector.slice(1));
             return selector;
         });
         return code.slice(0, indexOfQuote) + selectors;

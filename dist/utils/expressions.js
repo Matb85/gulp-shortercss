@@ -8,8 +8,5 @@ exports["default"] = {
     idSelector: new RegExp("(#|\\[id[\\^\\$\\|\\*]?=)" + selectorName.source + selectorSuffix.source, "gi"),
     elementAttribute: /(class|id|for|aria-labelledby)\s*=\s*["']([\w\s]+)["']/g,
     idList: /\.(getElementById|id)\s*?[(|=]\s*?(["'])(-*_*[\w\s])+/g,
-    classList: /\.(getElementsByClassName|classList\.add|classList\.remove|classList\.toggle|className)\s*?[(|=]\s*?(["'])(-*_*[\w\s])+/g,
-    jsString: function (name) {
-        return new RegExp("['|\"]" + name + "['|\"]", "g");
-    }
+    classList: /\.(getElementsByClassName|classList\.add|classList\.remove|classList\.toggle|className)\s*?[(|=]\s*?(["'])(-*_*[\w\s])+/g
 };
