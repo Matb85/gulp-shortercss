@@ -5,7 +5,7 @@
     "es2021": true
   },
   "extends": ["standard"],
-  "ignorePatterns": ["lib/**", "dist/**"],
+  "ignorePatterns": ["lib/**", "dist/**", "test/example/**"],
 
   "parser": "@typescript-eslint/parser",
   "parserOptions": {

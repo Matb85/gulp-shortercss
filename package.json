@@ -1,7 +1,7 @@
 {
   "name": "gulp-selectors",
   "description": "Minify CSS selectors.",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "main": "./dist/index.js",
   "scripts": {
     "build": "tsc",

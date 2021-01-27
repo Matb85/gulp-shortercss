@@ -1,7 +1,7 @@
 import { AvailableProcessors, ProcessorFunction } from "../index";
 export default { getForExtension };
 
-// getProcessorsForExtension
+// get processors for file's extension
 function getForExtension(processors: AvailableProcessors, extension: string): Array<ProcessorFunction> {
   const selectedProcessors: Array<ProcessorFunction> = [];
   for (const processor in processors) {

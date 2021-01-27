@@ -4,19 +4,23 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 exports.__esModule = true;
 var expressions_1 = __importDefault(require("../utils/expressions"));
+var js_strings_1 = __importDefault(require("./js-strings"));
+var css_1 = __importDefault(require("./css"));
 function default_1(file, classLibrary, idLibrary) {
+    file = file.replace(/<script>([\s\S]*?)<\/script>/im, function (code) {
+        return js_strings_1["default"](code, classLibrary, idLibrary);
+    });
+    file = file.replace(/<style>([\s\S]*?)<\/style>/im, function (code) {
+        return css_1["default"](code, classLibrary, idLibrary);
+    });
     return file.replace(expressions_1["default"].elementAttribute, function (attributes) {
         var attribute = attributes.split("=");
         return (attribute[0] +
             "=" +
             attribute[1].replace(expressions_1["default"].selectorName, function (selectorName) {
-                switch (attribute[0]) {
-                    case "id":
-                    case "for":
-                        return idLibrary.get(selectorName);
-                    default:
-                        return classLibrary.get(selectorName);
-                }
+                if (/(id|for)/.test(attribute[0]))
+                    return idLibrary.get(selectorName);
+                return classLibrary.get(selectorName);
             }));
     });
 }

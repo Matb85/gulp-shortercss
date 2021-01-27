@@ -65,7 +65,7 @@ export default {
    * .getElementById
    * .id
    */
-  idList: /(\.(getElementById|id))\s*?[(|=]\s*?(["'])(-*_*[\w\s])+/g,
+  idList: /\.(getElementById|id)\s*?[(|=]\s*?(["'])(-*_*[\w\s])+/g,
   /**
    * Matches Class Values
    *
@@ -82,7 +82,7 @@ export default {
    * .attr This has a known bug. There is no way to differentiate the leading "class" from "id" in attr without look-behind, which javascript does not support. Therefore, all matches using this regex need to be filtered to remove results which are lists that have "id" as the first value.
    * .hasClass
    */
-  classList: /(\.(getElementsByClassName|classList\.add|classList\.remove|classList\.toggle|className))\s*?[(|=]\s*?(["'])(-*_*[\w\s])+/g,
+  classList: /\.(getElementsByClassName|classList\.add|classList\.remove|classList\.toggle|className)\s*?[(|=]\s*?(["'])(-*_*[\w\s])+/g,
   /**
    * Builds a regular expression which will match a quoted string.
    *

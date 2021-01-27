@@ -8,14 +8,23 @@ function default_1(file, classLibrary, idLibrary) {
     file = file.replace(expressions_1["default"].idList, function (exp) {
         var indexOfQuote = exp.search(/["']/g) + 1;
         var selector = exp.slice(indexOfQuote);
-        console.log("id: " + selector);
         return exp.slice(0, indexOfQuote) + idLibrary.get(selector);
     });
     file = file.replace(expressions_1["default"].classList, function (exp) {
         var indexOfQuote = exp.search(/["']/g) + 1;
         var selector = exp.slice(indexOfQuote);
-        console.log("class: " + selector);
         return exp.slice(0, indexOfQuote) + classLibrary.get(selector);
+    });
+    file = file.replace(/\.querySelector(All)?\s*?\(\s*?(["'])([#.]?-*_*[\w\s])+/g, function (code) {
+        var indexOfQuote = code.search(/["']/g) + 1;
+        var selectors = code.slice(indexOfQuote).replace(/[#.](-*_*[\w])+/g, function (selector) {
+            if (selector[0] === "#")
+                selector = "#" + idLibrary.get(selector.slice(1));
+            if (selector[0] === ".")
+                selector = "." + classLibrary.get(selector.slice(1));
+            return selector;
+        });
+        return code.slice(0, indexOfQuote) + selectors;
     });
     return file;
 }
