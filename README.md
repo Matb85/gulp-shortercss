@@ -82,7 +82,7 @@ module.exports = {
 
 ### Processors
 
-CSS Terser relies on processors. Processors a basically functions that follow the sheme below:
+CSS Terser relies on processors. Processors are just functions that follow the scheme below:
 
 ```ts
 function(file: string, classLibrary: LibraryInstance, idLibrary: LibraryInstance): string {
@@ -112,7 +112,7 @@ Still not sure? Jump into the (project's src folder)[https://github.com/Matb85/c
 
 #### Creating processors
 
-Of course you don't have to rely on the built-in processors. Just create a funtion like the one above and put it in the config.
+Of course, you don't have to rely on the built-in processors. Just create a function like the one above and put it in the config.
 
 #### Available processors
 
@@ -128,7 +128,7 @@ Of course you don't have to rely on the built-in processors. Just create a funti
 
 Sure, if you think you can improve this project, go ahead! But, just three little things:
 
-- use [typescript][1]
+- use [Typescript][1]
 - follow ESlint's suggestions
 - follow [Conventional Commit's specification][2]
 
