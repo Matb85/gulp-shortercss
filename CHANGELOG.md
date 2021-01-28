@@ -4,10 +4,14 @@ All notable changes to this project will be documented in this file. See [standa
 
 ### 0.3.1 (2021-01-27)
 
+### ⚠ BREAKING CHANGES
+
+- remove ./src/utils/processor-utils.ts as its no longer necessary
 
 ### Features
 
-* load config from file ([c145860](https://github.com/calebthebrewer/gulp-selectors/commit/c145860e0e23e11a29c4df8cc3d6edfca04974d2))
+- load config from file c145860
+- remove ./src/utils/processor-utils.ts as its no longer necessary
 
 ### 0.3.0:
 

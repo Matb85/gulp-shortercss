@@ -8,13 +8,13 @@ module.exports = {
     css,
     jsStrings,
   },
-  rules: {
+  bindings: {
     html: ["html"],
     css: ["css"],
     jsStrings: ["js"],
   },
   ignores: {
-    classes: [],
-    ids: [],
+    classes: ["review", "lazy-load", "dot", "curdot", "nextdot", "gpart", "stop"],
+    ids: ["opinions", "prev", "next", "pagination"],
   },
 };

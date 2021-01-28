@@ -4,10 +4,11 @@ import Library, { LibraryInstance } from "./utils/library";
 import { extend } from "lodash";
 import { map } from "event-stream";
 import utils from "gulp-util";
+import appRoot from "app-root-path";
 
 export type ProcessorFunction = (file: string, classLibrary: LibraryInstance, idLibrary: LibraryInstance) => string;
 
-export interface Rules {
+export interface Bindings {
   [key: string]: Array<string>;
 }
 export interface Processors {
@@ -21,16 +22,16 @@ export type IgnoresType = {
 class Plugin {
   ignores: IgnoresType;
   processors: Processors;
-  rules: Rules;
+  bindings: Bindings;
   classLibrary: LibraryInstance;
   idLibrary: LibraryInstance;
-  constructor(config: { processors: Processors; rules: Rules; ignores: IgnoresType }) {
-    if (typeof config === "undefined") config = require("./cssterser.config.js");
-    if (typeof config === "string") config = require(config);
+  constructor(config: { processors: Processors; bindings: Bindings; ignores: IgnoresType }) {
+    if (typeof config === "undefined") config = require(appRoot + "/cssterser.config.js");
+    if (typeof config === "string") config = require(appRoot + config);
 
     // ensure processor names are set as expected
     this.ignores = extend({ classes: [], ids: [] }, config.ignores);
-    this.rules = extend({ css: ["css"], html: ["html"] }, config.rules);
+    this.bindings = extend({ css: ["css"], html: ["html"] }, config.bindings);
     this.processors = config.processors;
     // build new libraries to use
     this.classLibrary = new Library(this.ignores.classes);
@@ -46,11 +47,9 @@ class Plugin {
       const extension = extensions[extensions.length - 1];
       let reducedFile = String(file.contents);
 
-      for (const rule in this.rules) {
-        console.log("rule: " + rule);
-        if (this.rules[rule].includes(extension)) {
-          console.log(this.processors);
-          reducedFile = this.processors[rule](reducedFile, this.classLibrary, this.idLibrary);
+      for (const binding in this.bindings) {
+        if (this.bindings[binding].includes(extension)) {
+          reducedFile = this.processors[binding](reducedFile, this.classLibrary, this.idLibrary);
         }
       }
       file.contents = Buffer.from(reducedFile);

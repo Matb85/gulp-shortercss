@@ -1,5 +1,5 @@
 {
-  "name": "gulp-selectors",
+  "name": "css-terser",
   "description": "Minify CSS selectors.",
   "version": "0.3.1",
   "main": "./dist/index.js",
@@ -14,6 +14,7 @@
     "release": "standard-version"
   },
   "dependencies": {
+    "app-root-path": "^3.0.0",
     "event-stream": "~3.1.7",
     "gulp-util": "~3.0.1",
     "lodash": "~2.4.1",
@@ -41,12 +42,6 @@
     "name": "Caleb Brewer",
     "email": "calebthebrewer@gmail.com"
   },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/calebthebrewer/gulp-selectors.git"
-  },
-  "homepage": "https://github.com/calebthebrewer/gulp-selectors",
-  "bugs": "https://github.com/calebthebrewer/gulp-selectors/issues",
   "keywords": [
     "gulp",
     "gulpplugin",

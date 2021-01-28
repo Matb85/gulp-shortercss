@@ -13,9 +13,9 @@ export default function(file: string, classLibrary: LibraryInstance, idLibrary: 
 
   file = file.replace(expressions.classSelector, function(selector) {
     // exclude property values (matches ending in ')')
-    if (selector[selector.length - 1] === ")") {
-      return selector;
-    }
+    // if (selector[selector.length - 1] === ")") {
+    //   return selector;
+    // }
     return selector.replace(selectorNameMatch, function(selectorName) {
       return classLibrary.get(selectorName, true);
     });
@@ -23,9 +23,9 @@ export default function(file: string, classLibrary: LibraryInstance, idLibrary: 
 
   file = file.replace(expressions.idSelector, function(selector) {
     // exclude property values (matches ending in '; or }')
-    if (selector[selector.length - 1] === ";" || selector[selector.length - 1] === "}") {
-      return selector;
-    }
+    // if (selector[selector.length - 1] === ";" || selector[selector.length - 1] === "}") {
+    //   return selector;
+    // }
     return selector.replace(selectorNameMatch, function(selectorName) {
       return idLibrary.get(selectorName, true);
     });

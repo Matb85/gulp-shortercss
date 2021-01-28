@@ -1,12 +1,14 @@
 "use strict";
 exports.__esModule = true;
 var selectorName = /(-?[_a-zA-Z]+[_\w-]*)/;
-var selectorSuffix = /((?=[\s:#.{,>~+[\]]))(?=(?:.|\n|\r)*{)/;
+function stylesheetSel(char) {
+    return new RegExp(/(?<!:\s*)/.source + char.source + /(-*_*[\w])+(?!(.)*;)/.source, "gi");
+}
 exports["default"] = {
     selectorName: new RegExp(selectorName, "g"),
-    classSelector: new RegExp("(\\.|\\[class[\\^\\$\\|\\*]?=)" + selectorName.source + selectorSuffix.source, "gi"),
-    idSelector: new RegExp("(#|\\[id[\\^\\$\\|\\*]?=)" + selectorName.source + selectorSuffix.source, "gi"),
-    elementAttribute: /(class|id|for|aria-labelledby)\s*=\s*["']([\w\s]+)["']/g,
+    classSelector: stylesheetSel(/\./),
+    idSelector: stylesheetSel(/#/),
+    elementAttribute: /(class|id|for|aria-labelledby)\s*=\s*["'](-*_*[\w\s])+["']/g,
     idList: /\.(getElementById|id)\s*?[(|=]\s*?(["'])(-*_*[\w\s])+/g,
     classList: /\.(getElementsByClassName|classList\.add|classList\.remove|classList\.toggle|className)\s*?[(|=]\s*?(["'])(-*_*[\w\s])+/g
 };

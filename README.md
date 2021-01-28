@@ -2,129 +2,130 @@
 
 # This project is based on [gulp-selectors](https://github.com/cazzer/gulp-selectors/)
 
-I am no longer maintaining this repository and would be happy to transfer it to someone who still actively uses it. Respond to the [maintainer issue](https://github.com/cazzer/gulp-selectors/issues/26) if you are interested in taking ownership. In case you are interested, I use [css-modules](https://github.com/css-modules/css-modules) now instead.
-
-# gulp-selectors
-
-[![Build Status][travis-image]][travis-url] [![Code Climate][cc-image]][cc-url] [![Test Coverage][coverage-image]][coverage-url] [![NPM Version][npm-image]][npm-url]
-
 > Minify those pesky selector names down to nothing with this fancy gulp plugin. Minified selectors will be applied consistently across all files piped into it.
 
-| Input                                 | Output                       |
-| ------------------------------------- | ---------------------------- |
-| `.class-name { ... }`                 | `.a { ... }`                 |
-| `.another-class { ... }`              | `.b { ... }`                 |
-| `#an-id { ... }`                      | `#a { ... }`                 |
-| `<div class="class-name"> ... </div>` | `<div class="a"> ... </div>` |
+| Input                                               | Output                                 |
+| --------------------------------------------------- | -------------------------------------- |
+| `.class-name { ... }`                               | `.a { ... }`                           |
+| `.another-class { ... }`                            | `.b { ... }`                           |
+| `#an-id { ... }`                                    | `#a { ... }`                           |
+| `<div class="class-name"> ... </div>`               | `<div class="a"> ... </div>`           |
+| `document.getElementById("an-id")`                  | `document.getElementById("a")`         |
+| `document.querySelectorAll("#an-id > .class-name")` | `document.querySelectorAll("#a > .a")` |
 
 _You're like: `.some-super-descriptive-selector-name {...}`, and it's like: `.a {...}`_
 
-## Usage
+## Setup
 
-First and foremost:
-`npm install gulp-selectors`
+1. First and foremost: `npm i -D gulp-selectors`
+
+2. Create a Gulp task:
 
 ```js
-var gulp = require("gulp");
-var gs = require("gulp-selectors");
+const { src, dest } = require("gulp");
+// setting up the plugin: running the init methos with a path to the config file as an argument
+const Selectors = require("../../dist").init("/test/example/cssterser.config.js");
 
-gulp
-  .src(["src/**/*.css", "src/**/*.html"])
-  .pipe(gs.run())
-  .pipe(gulp.dest("dist"));
+exports.default = function() {
+  return (
+    src(["index.html", "style.css", "script.js"])
+      // running
+      .pipe(Selectors.run())
+      // outputing some info regarding selectors that have been minified - OPTIONAL
+      .pipe(Selectors.info())
+      .pipe(dest("./dist"))
+  );
+};
 ```
 
-You can also pass some options into run:
+3. add some options. You can put them in one of these places:
 
-`gs.run(processors, ignores)`
+- cssterser.config.js at the root of your project.
+- directly as argument in the init method
 
-CSS and HTML files are processed well by default, just pass in your glob of files and all classes and IDs will be reduced to a minified form. Of course you can use it for some more specific functions if you like. See the included [sample gulpfile](https://github.com/calebthebrewer/gulp-selectors/blob/master/test/example/gulpfile.js) for a full example of how to effectively use gulp-selectors in your gulp workflow.
+### options
 
-### Defaults
-
-All arguments are optional. If omitted, processors will default to `css` and `html` and ignores
-will be empty:
+Sure, the plugin is fully configurable. Here's the scheme:
 
 ```js
-gs.run(
-  {
-    css: ["css"],
-    html: ["html"],
+// cssterser.config.js
+
+// first import the processors - html, css and js-strings are built-in
+const html = require("css-terser/dist/processors/html.js").default;
+const css = require("css-terser/dist/processors/css.js").default;
+const jsStrings = require("css-terser/dist/processors/js-strings.js").default;
+const yourProcessor = require("path/to/your/processor");
+module.exports = {
+  // put the processors here
+  processors: {
+    html,
+    css,
+    jsStrings,
+    yourProcessor,
   },
-  {}
-);
+  // set bindings - assign file extensions to the processors specified above
+  bindings: {
+    html: ["html", "pug"],
+    css: ["css"],
+    jsStrings: ["js"],
+    yourProcessor: ["vue", "jsx"],
+  },
+  // put heree classes and ids that you don't want to be minified
+  ignores: {
+    classes: ["class", "another_class"],
+    ids: ["id", "another-id"],
+  },
+};
 ```
-
-### Advanced Usage
-
-```js
-var processors = {
-        'css':  ['scss', 'css'],        // run the css processor on .scss and .css files
-        'html': ['haml'],               // run the html processor on .haml files
-        'js-strings':   ['js']          // run the js-strings plugin on js files
-    },
-    ignores = {
-        classes: ['hidden', 'active']   // ignore these class selectors,
-        ids: '*'                        // ignore all IDs
-    };
-
-gs.run(processors, ignores);
-```
-
-Two processors are built in for your convenience: `css` and `html` are stable but `js-strings` and `remove-unused` are beta and may be moved to their own repositories.
-
-- css: matches .selectors and #selectors
-- html: matches id="selector"s, class="selector"s, and for="selector"s
-- js: matches exact strings by looping through the library, which is dangerous if you use common words as selectors
-- remove-unused: should be run last, and only on stylesheets - it removes all declarations present in the library which haven't been used
-
-If a processor is listed which isn't built in, gulp-selectors will attempt to `require` it.
-
-## How gulp-selectors works
-
-Calling `gs.run()` builds a library which persists for all processors used in the call. Processors are run on all associated files and all selectors, besides those that have been ignored, will be minified.
 
 ### Processors
 
-```js
-{
-    'css': ['css', 'scss'],
-    'html': ['html', 'tpl.js'],
-    'js-strings': ['js', '!tpl.js'],
-    'your-custom-processor': ['.ext']
+CSS Terser relies on processors. Processors a basicly functions that follow the sheme below:
+
+```ts
+function(file: string, classLibrary: LibraryInstance, idLibrary: LibraryInstance): string {
+  // your beutiful code
+  return TersedFile
+};
+```
+
+**LibraryInstance** is an istance of the Library class:
+
+```ts
+interface LibraryInstance {
+  _library: LibraryType;
+  _ignores: Array<string>;
+  size: number;
+  has(name: string): boolean;
+  get(name: string, dontCount?: boolean): string; // use this to get a shortname of a class or id
+  getAll(): Array<string>;
+  getUnused(): Array<string>;
+  getSize(): number;
+  getFullNames(): Array<string>;
+  stats(): { size: number; unused: number };
 }
 ```
 
-`css` and `html` are built in. Additional processors referenced will be injected where needed so it is important to ensure all are installed. Processors are used like this:
+Still not sure? Jump into the project's src folder, or raise an issue!
 
-```js
-processor(file, classLibrary, idLibrary);
-```
+#### Creating processors
 
-`File` is the string containing the file contents. Each of the two libraries exposes the following API:
+Of course you don't have to rely on the built-in processors. Just create a funtion like the one above and put it in the config.
 
-- set(selectorName): returns a minified selector name
-- has(selectorName): tests if the name exists
-- get(selectorName, [dontCount]): ...
+#### Available processors
 
-```js
-libraries;
-```
+##### Regex-based:
 
-### Ignores
+- html (built-in)
+- css (built-in)
+- jsStrings (built-in)
 
-```js
-{
-    ids: ['content', 'target'],
-    classes: ['hidden', 'active']
-}
-```
+**Have you created a processor? Share it with us**:smiley:
 
-[travis-url]: https://travis-ci.org/calebthebrewer/gulp-selectors
-[travis-image]: https://travis-ci.org/calebthebrewer/gulp-selectors.svg?branch=master
-[cc-image]: https://codeclimate.com/github/calebthebrewer/gulp-selectors/badges/gpa.svg
-[cc-url]: https://codeclimate.com/github/calebthebrewer/gulp-selectors
-[coverage-image]: https://codeclimate.com/github/calebthebrewer/gulp-selectors/badges/coverage.svg
-[coverage-url]: https://codeclimate.com/github/calebthebrewer/gulp-selectors
-[npm-image]: https://badge.fury.io/js/gulp-selectors.svg
-[npm-url]: http://badge.fury.io/js/gulp-selectors
+### Contributing
+
+Sure, if you think you can improve this project, go ahead! But, just three little things:
+
+- use (typescript)[https://www.typescriptlang.org/]
+- follow ESlint's suggestions
+- follow (Conventional Commit's specification)[https://www.conventionalcommits.org/en/v1.0.0/]

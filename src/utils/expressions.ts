@@ -1,6 +1,8 @@
 const selectorName = /(-?[_a-zA-Z]+[_\w-]*)/;
-const selectorSuffix = /((?=[\s:#.{,>~+[\]]))(?=(?:.|\n|\r)*{)/;
-
+// const selectorSuffix = /((?=[\s:#.{,>~+[\]]))(?=(?:.|\n|\r)*{)/;
+function stylesheetSel(char) {
+  return new RegExp(/(?<!:\s*)/.source + char.source + /(-*_*[\w])+(?!(.)*;)/.source, "gi");
+}
 /**
  * Some awesome expressions that I'll explain in a bit.
  * Test these dope boats live on http://scriptular.com/ to make your life easier.
@@ -25,23 +27,21 @@ export default {
   /**
    * Selectors should match any classes and ids defined in a stylesheet.
    *
-   * NOTE: This will also match hex values but will capture the close ; or } so that it can be
-   * ignored later.
-   *
    * Should match:
    * - #selector
    * - .selector
-   * - #e6e6e6;
+   * - url('foobar.classname')
    *
    * Shouldn't match:
+   * - #e6e6e6;
    * - body
    * - #666
    * - :pseudo
-   * - url('foobar.classname')
    * - other stupid stuff...I dunno check the tests
+   *
    */
-  classSelector: new RegExp("(\\.|\\[class[\\^\\$\\|\\*]?=)" + selectorName.source + selectorSuffix.source, "gi"),
-  idSelector: new RegExp("(#|\\[id[\\^\\$\\|\\*]?=)" + selectorName.source + selectorSuffix.source, "gi"),
+  classSelector: stylesheetSel(/\./),
+  idSelector: stylesheetSel(/#/),
   /**
    * Matches HTML class, id, and for attributes. I think those are the only ones we care about...
    *
@@ -57,7 +57,7 @@ export default {
    * - name="selector"
    * - href="selector"
    */
-  elementAttribute: /(class|id|for|aria-labelledby)\s*=\s*["']([\w\s]+)["']/g,
+  elementAttribute: /(class|id|for|aria-labelledby)\s*=\s*["'](-*_*[\w\s])+["']/g,
   /**
    * Matches ID Values
    *
