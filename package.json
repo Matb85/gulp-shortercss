@@ -3,6 +3,7 @@
   "description": "Minify CSS selectors.",
   "version": "0.4.0",
   "main": "./dist/index.js",
+  "types": "index.d.ts",
   "scripts": {
     "build": "tsc",
     "gulp": "gulp --gulpfile ./test/example/gulpfile.js",
@@ -39,8 +40,13 @@
     "vows": "^0.8.3"
   },
   "author": {
-    "name": "Caleb Brewer",
-    "email": "calebthebrewer@gmail.com"
+    "name": "Matb85"
+  },
+  "homepage": "https://github.com/Matb85/css-terser",
+  "bugs": "https://github.com/Matb85/css-terser/issues",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Matb85/css-terser.git"
   },
   "keywords": [
     "gulp",
@@ -49,6 +55,8 @@
     "minify",
     "css",
     "selectors",
+    "terse",
+    "terser",
     "styles",
     "compress"
   ],

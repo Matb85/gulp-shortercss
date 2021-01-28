@@ -1,7 +1,5 @@
-.idea/
 node_modules/
 coverage/
 lib/
-test/example/dist/
 
 test.js

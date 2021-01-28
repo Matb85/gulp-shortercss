@@ -1,7 +1,7 @@
 "use strict";
 // import processorUtils from "./utils/processor-utils";
 import Library, { LibraryInstance } from "./utils/library";
-import { extend } from "lodash";
+import _ from "lodash";
 import { map } from "event-stream";
 import utils from "gulp-util";
 import appRoot from "app-root-path";
@@ -18,20 +18,25 @@ export type IgnoresType = {
   classes: Array<string>;
   ids: Array<string>;
 };
+export interface Config {
+  processors: Processors;
+  bindings: Bindings;
+  ignores: IgnoresType;
+}
 
-class Plugin {
+class CssTerser {
   ignores: IgnoresType;
   processors: Processors;
   bindings: Bindings;
   classLibrary: LibraryInstance;
   idLibrary: LibraryInstance;
-  constructor(config: { processors: Processors; bindings: Bindings; ignores: IgnoresType }) {
+  constructor(config: Config) {
     if (typeof config === "undefined") config = require(appRoot + "/cssterser.config.js");
     if (typeof config === "string") config = require(appRoot + config);
 
     // ensure processor names are set as expected
-    this.ignores = extend({ classes: [], ids: [] }, config.ignores);
-    this.bindings = extend({ css: ["css"], html: ["html"] }, config.bindings);
+    this.ignores = _.extend({ classes: [], ids: [] }, config.ignores);
+    this.bindings = _.extend({ css: ["css"], html: ["html"] }, config.bindings);
     this.processors = config.processors;
     // build new libraries to use
     this.classLibrary = new Library(this.ignores.classes);
@@ -70,8 +75,8 @@ class Plugin {
 }
 
 module.exports = {
-  Plugin,
-  init(config): Plugin {
-    return new Plugin(config);
+  CssTerser,
+  init(config: Config): CssTerser {
+    return new CssTerser(config);
   },
 };
