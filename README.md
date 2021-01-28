@@ -1,4 +1,4 @@
-# CSS Terser - a Gulp plugin for tersing/minifying css selectors' names, written in Typescript.
+# CSS Terser - a Gulp plugin for uglifying/minifying css selectors' names, written in Typescript.
 
 # This project is based on [gulp-selectors](https://github.com/cazzer/gulp-selectors/)
 
@@ -54,7 +54,9 @@ Sure, the plugin is fully configurable. Here's the scheme:
 const html = require("css-terser/dist/processors/html.js").default;
 const css = require("css-terser/dist/processors/css.js").default;
 const jsStrings = require("css-terser/dist/processors/js-strings.js").default;
+// Of course you can use your own ones
 const yourProcessor = require("path/to/your/processor");
+
 module.exports = {
   // put the processors here
   processors: {
