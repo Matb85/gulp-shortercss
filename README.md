@@ -17,7 +17,7 @@ _You're like: `.some-super-descriptive-selector-name {...}`, and it's like: `.a 
 
 ## Setup
 
-1. First and foremost: `npm i -D gulp-selectors`
+1. First and foremost: `npm i -D css-terser`
 
 2. Create a Gulp task:
 
@@ -43,7 +43,7 @@ exports.default = function() {
 - cssterser.config.js at the root of your project.
 - directly as argument in the init method
 
-### options
+### Options
 
 Sure, the plugin is fully configurable. Here's the scheme:
 
@@ -82,7 +82,7 @@ module.exports = {
 
 ### Processors
 
-CSS Terser relies on processors. Processors a basicly functions that follow the sheme below:
+CSS Terser relies on processors. Processors a basically functions that follow the sheme below:
 
 ```ts
 function(file: string, classLibrary: LibraryInstance, idLibrary: LibraryInstance): string {
@@ -108,7 +108,7 @@ interface LibraryInstance {
 }
 ```
 
-Still not sure? Jump into the project's src folder, or raise an issue!
+Still not sure? Jump into the (project's src folder)[https://github.com/Matb85/css-terser/tree/master/src], or raise an (issue)[https://github.com/Matb85/css-terser/issues]!
 
 #### Creating processors
 
@@ -122,12 +122,15 @@ Of course you don't have to rely on the built-in processors. Just create a funti
 - css (built-in)
 - jsStrings (built-in)
 
-**Have you created a processor? Share it with us**:smiley:
+**Have you created a processor? Share it with us** :smiley:
 
 ### Contributing
 
 Sure, if you think you can improve this project, go ahead! But, just three little things:
 
-- use (typescript)[https://www.typescriptlang.org/]
+- use [typescript][1]
 - follow ESlint's suggestions
-- follow (Conventional Commit's specification)[https://www.conventionalcommits.org/en/v1.0.0/]
+- follow [Conventional Commit's specification][2]
+
+[1]: https://www.typescriptlang.org/
+[2]: https://www.conventionalcommits.org/en/v1.0.0/
