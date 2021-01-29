@@ -1,5 +1,5 @@
-import { IgnoresType, Processors, Bindings, Config } from "./src/index";
-import { LibraryInstance } from "./src/utils/library";
+import { IgnoresType, Processors, Bindings, Config } from "shortercss/src/index";
+import { LibraryInstance } from "shortercss/src/utils/library";
 
 export class CssTerser {
   ignores: IgnoresType;
