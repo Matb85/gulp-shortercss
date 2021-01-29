@@ -1,6 +1,6 @@
 {
-  "name": "css-terser",
-  "description": "A Gulp plugin for uglifying/minifying css selectors' names",
+  "name": "gulp-css-terser",
+  "description": "A CSS Terser plugin for gulp",
   "version": "0.4.1",
   "main": "./dist/index.js",
   "types": "index.d.ts",
@@ -16,6 +16,7 @@
   },
   "dependencies": {
     "app-root-path": "^3.0.0",
+    "css-terser": "^2.0.0",
     "event-stream": "~3.1.7",
     "gulp-util": "~3.0.1",
     "lodash": "~2.4.1",
@@ -24,8 +25,8 @@
   "devDependencies": {
     "@types/lodash": "^4.14.168",
     "@types/node": "^14.14.22",
-    "@typescript-eslint/eslint-plugin": "^4.14.0",
-    "@typescript-eslint/parser": "^4.14.0",
+    "@typescript-eslint/eslint-plugin": "^4.14.1",
+    "@typescript-eslint/parser": "^4.14.1",
     "codeclimate-test-reporter": "^0.5.1",
     "eslint": "^7.18.0",
     "eslint-config-standard": "^16.0.2",

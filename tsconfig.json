@@ -15,7 +15,8 @@
     "noFallthroughCasesInSwitch": true,
     "esModuleInterop": true,
     "removeComments": true,
-    "sourceMap": false
+    "sourceMap": false,
+    "target": "ES6"
   },
   "include": ["src/**/*"],
   "exclude": ["node_modules"],

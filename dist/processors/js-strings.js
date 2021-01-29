@@ -2,22 +2,22 @@
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
-exports.__esModule = true;
-var expressions_1 = __importDefault(require("../utils/expressions"));
+Object.defineProperty(exports, "__esModule", { value: true });
+const expressions_1 = __importDefault(require("../utils/expressions"));
 function default_1(file, classLibrary, idLibrary) {
-    file = file.replace(expressions_1["default"].idList, function (exp) {
-        var indexOfQuote = exp.search(/["']/g) + 1;
-        var selector = exp.slice(indexOfQuote);
+    file = file.replace(expressions_1.default.idList, function (exp) {
+        const indexOfQuote = exp.search(/["']/g) + 1;
+        const selector = exp.slice(indexOfQuote);
         return exp.slice(0, indexOfQuote) + idLibrary.get(selector);
     });
-    file = file.replace(expressions_1["default"].classList, function (exp) {
-        var indexOfQuote = exp.search(/["']/g) + 1;
-        var selector = exp.slice(indexOfQuote);
+    file = file.replace(expressions_1.default.classList, function (exp) {
+        const indexOfQuote = exp.search(/["']/g) + 1;
+        const selector = exp.slice(indexOfQuote);
         return exp.slice(0, indexOfQuote) + classLibrary.get(selector);
     });
     file = file.replace(/\.querySelector(All)?\s*?\(\s*?(["'])([#.]?-*_*[\w\s])+/g, function (code) {
-        var indexOfQuote = code.search(/["']/g) + 1;
-        var selectors = code.slice(indexOfQuote).replace(/[#.](-*_*[\w])+/g, function (selector) {
+        const indexOfQuote = code.search(/["']/g) + 1;
+        const selectors = code.slice(indexOfQuote).replace(/[#.](-*_*[\w])+/g, function (selector) {
             if (selector[0] === "#")
                 return "#" + idLibrary.get(selector.slice(1));
             if (selector[0] === ".")
@@ -28,4 +28,4 @@ function default_1(file, classLibrary, idLibrary) {
     });
     return file;
 }
-exports["default"] = default_1;
+exports.default = default_1;

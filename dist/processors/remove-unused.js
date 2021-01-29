@@ -1,14 +1,14 @@
 "use strict";
-exports.__esModule = true;
+Object.defineProperty(exports, "__esModule", { value: true });
 function default_1(file, classLibrary) {
     classLibrary.getUnused().forEach(function (selector) {
-        var expression = new RegExp("[,?\\s*]\\." + selector + "\\s*{[^}]*}", "g");
+        const expression = new RegExp("[,?\\s*]\\." + selector + "\\s*{[^}]*}", "g");
         file = file.replace(expression, function (match) {
             if (match[0] !== ",") {
                 return "";
             }
             else {
-                var subExpression = new RegExp("[,?\\s*]\\." + selector);
+                const subExpression = new RegExp("[,?\\s*]\\." + selector);
                 return match.replace(subExpression, function () {
                     return "";
                 });
@@ -17,4 +17,4 @@ function default_1(file, classLibrary) {
     });
     return file;
 }
-exports["default"] = default_1;
+exports.default = default_1;
