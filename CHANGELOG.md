@@ -2,6 +2,22 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.0.0](https://github.com/Matb85/css-terser/compare/v0.4.1...v2.0.0) (2021-01-29)
+
+
+### ⚠ BREAKING CHANGES
+
+* delete redundat ts from css-terser - now its an distinct project with css-terser as a dependency
+
+### Features
+
+* delete redundat ts from css-terser - now its an distinct project with css-terser as a dependency ([1d136a6](https://github.com/Matb85/css-terser/commit/1d136a606c852562d8baf807de4061757a790e80))
+
+
+### Bug Fixes
+
+* package.json update ([afd9fd2](https://github.com/Matb85/css-terser/commit/afd9fd27a76a987eefd51c8477298f1f68ec418f))
+
 ### [0.4.1](https://github.com/Matb85/css-terser/compare/v0.4.0...v0.4.1) (2021-01-28)
 
 

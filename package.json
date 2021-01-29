@@ -1,7 +1,7 @@
 {
   "name": "gulp-css-terser",
   "description": "A CSS Terser plugin for gulp",
-  "version": "0.4.1",
+  "version": "2.0.0",
   "main": "./dist/index.js",
   "types": "index.d.ts",
   "scripts": {
