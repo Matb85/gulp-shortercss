@@ -1,8 +1,8 @@
 # Gulp CSS Terser - a Gulp plugin for uglifying/minifying css selectors.
 
-## This project is only a wrapper around (CSS Terser)[https://github.com/Matb85/css-terser]
+## This project is only a wrapper around [CSS Terser][1]
 
-### More info (here)[https://github.com/Matb85/css-terser]
+### More info [here][1]
 
 ### Setup
 
@@ -55,20 +55,22 @@ const Selectors = require("../../dist").init({
 
 ### Config
 
-see https://github.com/Matb85/css-terser
+see https://github.com/Matb85/css-terser#config
 
 ### Processors
 
-see https://github.com/Matb85/css-terser
+see https://github.com/Matb85/css-terser#processors
 
 #### Creating processors
 
-see https://github.com/Matb85/css-terser
+see https://github.com/Matb85/css-terser#creating-processors
 
 #### Available processors
 
-see https://github.com/Matb85/css-terser
+see https://github.com/Matb85/css-terser#available-processors
 
 ### Contributing
 
-see https://github.com/Matb85/css-terser
+see https://github.com/Matb85/css-terser#contributing
+
+[1]: https://github.com/Matb85/css-terser
