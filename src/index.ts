@@ -1,6 +1,6 @@
 "use strict";
-import ShorterCSS from "css-terser";
-import { Config } from "css-terser/src/index";
+import ShorterCSS from "shortercss";
+import { Config } from "shortercss/src/index";
 import { map } from "event-stream";
 import utils from "gulp-util";
 

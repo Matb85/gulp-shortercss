@@ -3,10 +3,10 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const css_terser_1 = __importDefault(require("css-terser"));
+const shortercss_1 = __importDefault(require("shortercss"));
 const event_stream_1 = require("event-stream");
 const gulp_util_1 = __importDefault(require("gulp-util"));
-class GulpCssTerser extends css_terser_1.default {
+class GulpShorterCSS extends shortercss_1.default {
     run() {
         const miniSelectors = (file, callback) => {
             const extensions = file.path.split(".");
@@ -32,8 +32,8 @@ class GulpCssTerser extends css_terser_1.default {
     }
 }
 module.exports = {
-    GulpCssTerser,
+    GulpShorterCSS,
     init(config) {
-        return new GulpCssTerser(config);
+        return new GulpShorterCSS(config);
     },
 };
