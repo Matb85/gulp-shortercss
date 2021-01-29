@@ -1,32 +1,31 @@
-# Gulp CSS Terser - a Gulp plugin for uglifying/minifying css selectors' names, written in Typescript.
+# Gulp CSS Terser - a Gulp plugin for uglifying/minifying css selectors.
 
-# This project is based on [gulp-selectors](https://github.com/cazzer/gulp-selectors/)
+## This project is only a wrapper around (CSS Terser)[https://github.com/Matb85/css-terser]
 
-> Minify those pesky selector names down to nothing with this fancy gulp plugin. Minified selectors will be applied consistently across all files piped into it.
+### More info (here)[https://github.com/Matb85/css-terser]
 
-| Input                                               | Output                                 |
-| --------------------------------------------------- | -------------------------------------- |
-| `.class-name { ... }`                               | `.a { ... }`                           |
-| `.another-class { ... }`                            | `.b { ... }`                           |
-| `#an-id { ... }`                                    | `#a { ... }`                           |
-| `<div class="class-name"> ... </div>`               | `<div class="a"> ... </div>`           |
-| `document.getElementById("an-id")`                  | `document.getElementById("a")`         |
-| `document.querySelectorAll("#an-id > .class-name")` | `document.querySelectorAll("#a > .a")` |
+### Setup
 
-_You're like: `.some-super-descriptive-selector-name {...}`, and it's like: `.a {...}`_
+1. First and foremost: `npm i -D gulp-css-terser`
 
-## Setup
+2. Create a cssterser.config.js file and put some options:
 
-1. First and foremost: `npm i -D css-terser`
+```js
+// cssterser.config.js
 
-2. Create a Gulp task:
+module.exports = {
+  /*config*/
+};
+```
+
+3. In gulpfile.js create a task:
 
 ```js
 const { src, dest } = require("gulp");
-// setting up the plugin: running the init methos with a path to the config file as an argument
-const Selectors = require("../../dist").init("/test/example/cssterser.config.js");
+// setting up the plugin: running the init method with a path to the config file as an argument
+const Selectors = require("../../dist").init();
 
-exports.default = function() {
+exports.yourTask = function() {
   return (
     src(["index.html", "style.css", "script.js"])
       // running
@@ -38,98 +37,38 @@ exports.default = function() {
 };
 ```
 
-3. add some options. You can put them in one of these places:
+by default Css Terser will look at the root of your project for the config file. If you don't like this you can either:
 
-- cssterser.config.js at the root of your project.
-- directly as argument in the init method
-
-### Options
-
-Sure, the plugin is fully configurable. Here's the scheme:
+- specify path to the cssterser.config.js if it's in a different directory
 
 ```js
-// cssterser.config.js
-
-// first import the processors - html, css and js-strings are built-in
-const html = require("css-terser/dist/processors/html.js").default;
-const css = require("css-terser/dist/processors/css.js").default;
-const jsStrings = require("css-terser/dist/processors/js-strings.js").default;
-// Of course you can use your own ones
-const yourProcessor = require("path/to/your/processor");
-
-module.exports = {
-  // put the processors here
-  processors: {
-    html,
-    css,
-    jsStrings,
-    yourProcessor,
-  },
-  // set bindings - assign file extensions to the processors specified above
-  bindings: {
-    html: ["html", "pug"],
-    css: ["css"],
-    jsStrings: ["js"],
-    yourProcessor: ["vue", "jsx"],
-  },
-  // put heree classes and ids that you don't want to be minified
-  ignores: {
-    classes: ["class", "another_class"],
-    ids: ["id", "another-id"],
-  },
-};
+const Selectors = require("../../dist").init("path/to/cssterser.config.js");
 ```
+
+- put your config as a function's argument:
+
+```ts
+const Selectors = require("../../dist").init({
+  /*config*/
+});
+```
+
+### Config
+
+see https://github.com/Matb85/css-terser
 
 ### Processors
 
-CSS Terser relies on processors. Processors are just functions that follow the scheme below:
-
-```ts
-function(file: string, classLibrary: LibraryInstance, idLibrary: LibraryInstance): string {
-  // your beutiful code
-  return TersedFile
-};
-```
-
-**LibraryInstance** is an istance of the Library class:
-
-```ts
-interface LibraryInstance {
-  _library: LibraryType;
-  _ignores: Array<string>;
-  size: number;
-  has(name: string): boolean;
-  get(name: string, dontCount?: boolean): string; // use this to get a shortname of a class or id
-  getAll(): Array<string>;
-  getUnused(): Array<string>;
-  getSize(): number;
-  getFullNames(): Array<string>;
-  stats(): { size: number; unused: number };
-}
-```
-
-Still not sure? Jump into the (project's src folder)[https://github.com/Matb85/css-terser/tree/master/src], or raise an (issue)[https://github.com/Matb85/css-terser/issues]!
+see https://github.com/Matb85/css-terser
 
 #### Creating processors
 
-Of course, you don't have to rely on the built-in processors. Just create a function like the one above and put it in the config.
+see https://github.com/Matb85/css-terser
 
 #### Available processors
 
-##### Regex-based:
-
-- html (built-in)
-- css (built-in)
-- jsStrings (built-in)
-
-**Have you created a processor? Share it with us** :smiley:
+see https://github.com/Matb85/css-terser
 
 ### Contributing
 
-Sure, if you think you can improve this project, go ahead! But, just three little things:
-
-- use [Typescript][1] where possible
-- follow [Conventional Commit's specification][2]
-
-[1]: https://www.typescriptlang.org/
-[2]: https://www.conventionalcommits.org/en/v1.0.0/
+see https://github.com/Matb85/css-terser
