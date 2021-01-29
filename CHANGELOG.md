@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [2.1.3](https://github.com/Matb85/gulp-shortercss/compare/v2.1.2...v2.1.3) (2021-01-29)
+
+
+### Bug Fixes
+
+* bump shortercss version ([84f5beb](https://github.com/Matb85/gulp-shortercss/commit/84f5bebae3d7741e65dd153fb08945d82ce25a6e))
+
 ### [2.1.2](https://github.com/Matb85/gulp-shortercss/compare/v2.1.1...v2.1.2) (2021-01-29)
 
 ### [2.1.1](https://github.com/Matb85/gulp-css-shortener/compare/v2.1.0...v2.1.1) (2021-01-29)
