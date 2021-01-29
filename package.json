@@ -1,7 +1,7 @@
 {
   "name": "gulp-shortercss",
   "description": "A ShorterCSS plugin for Gulp",
-  "version": "2.1.1",
+  "version": "2.1.2",
   "main": "./dist/index.js",
   "types": "index.d.ts",
   "scripts": {
@@ -17,7 +17,7 @@
   "dependencies": {
     "event-stream": "~3.1.7",
     "gulp-util": "~3.0.1",
-    "shortercss": "^2.1.0"
+    "shortercss": "^2.1.1"
   },
   "devDependencies": {
     "@types/lodash": "^4.14.168",
@@ -40,11 +40,11 @@
   "author": {
     "name": "Matb85"
   },
-  "homepage": "https://github.com/Matb85/gulp-css-shortener",
-  "bugs": "https://github.com/Matb85/gulp-css-shortener/issues",
+  "homepage": "https://github.com/Matb85/gulp-shortercss",
+  "bugs": "https://github.com/Matb85/gulp-shortercss/issues",
   "repository": {
     "type": "git",
-    "url": "https://github.com/Matb85/gulp-css-shortener.git"
+    "url": "https://github.com/Matb85/gulp-shortercss.git"
   },
   "keywords": [
     "gulp",
