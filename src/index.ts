@@ -1,10 +1,10 @@
 "use strict";
-import CssTerser from "css-terser";
+import ShorterCSS from "css-terser";
 import { Config } from "css-terser/src/index";
 import { map } from "event-stream";
 import utils from "gulp-util";
 
-class GulpCssTerser extends CssTerser {
+class GulpShorterCSS extends ShorterCSS {
   run() {
     /** Main task for mini selectors uglify classes. Processes files based on type.
      * @param file Stream from es.map
@@ -36,8 +36,8 @@ class GulpCssTerser extends CssTerser {
   }
 }
 module.exports = {
-  GulpCssTerser,
-  init(config: Config): GulpCssTerser {
-    return new GulpCssTerser(config);
+  GulpShorterCSS,
+  init(config: Config): GulpShorterCSS {
+    return new GulpShorterCSS(config);
   },
 };

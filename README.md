@@ -1,17 +1,17 @@
-# Gulp CSS Terser - a Gulp plugin for uglifying/minifying css selectors.
+# Gulp ShorterCSS - a Gulp plugin for shortening/obfuscating css selectors.
 
-## This project is only a wrapper around [CSS Terser][1]
+## This project is only a wrapper around [ShorterCSS][1]
 
 ### More info [here][1]
 
 ### Setup
 
-1. First and foremost: `npm i -D gulp-css-terser`
+1. First and foremost: `npm i -D gulp-shortercss`
 
-2. Create a cssterser.config.js file and put some options:
+2. Create a cssShortener.config.js file and put some options:
 
 ```js
-// cssterser.config.js
+// shortercss.config.js
 
 module.exports = {
   /*config*/
@@ -37,12 +37,12 @@ exports.yourTask = function() {
 };
 ```
 
-by default Css Terser will look at the root of your project for the config file. If you don't like this you can either:
+by default Css Shortener will look at the root of your project for the config file. If you don't like this you can either:
 
-- specify path to the cssterser.config.js if it's in a different directory
+- specify path to the shortercss.config.js if it's in a different directory
 
 ```js
-const Selectors = require("../../dist").init("path/to/cssterser.config.js");
+const Selectors = require("../../dist").init("path/to/shortercss.config.js");
 ```
 
 - put your config as a function's argument:
@@ -53,24 +53,24 @@ const Selectors = require("../../dist").init({
 });
 ```
 
-### Config
+### Config + example
 
-see https://github.com/Matb85/css-terser#config
+see https://github.com/Matb85/shortercss#config
 
 ### Processors
 
-see https://github.com/Matb85/css-terser#processors
+see https://github.com/Matb85/shortercss#processors
 
 #### Creating processors
 
-see https://github.com/Matb85/css-terser#creating-processors
+see https://github.com/Matb85/shortercss#creating-processors
 
 #### Available processors
 
-see https://github.com/Matb85/css-terser#available-processors
+see https://github.com/Matb85/shortercss#available-processors
 
 ### Contributing
 
-see https://github.com/Matb85/css-terser#contributing
+see https://github.com/Matb85/shortercss#contributing
 
-[1]: https://github.com/Matb85/css-terser
+[1]: https://github.com/Matb85/shortercss
